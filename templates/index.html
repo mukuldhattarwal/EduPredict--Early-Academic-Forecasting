@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPredict: Early Academic Forecasting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container welcome-container">
+        <h1>EduPredict: Early Academic Forecasting</h1>
+        <p>Predict student scores using machine learning</p>
+        <a href="{{ url_for('predict_datapoint') }}" class="btn-start">Get Started</a>
+    </div>
+</body>
+</html>

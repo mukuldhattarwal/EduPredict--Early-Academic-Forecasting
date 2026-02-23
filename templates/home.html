@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPredict: Early Academic Forecasting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Exam Performance Indicator</h1>
+   
+        <form action="{{ url_for('predict_datapoint')}}" method="post" class="form-section">
+            <legend>Student Exam Performance Prediction</legend>
+        <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-control" name="gender" placeholder="Enter you Gender" required>
+                <option class="placeholder" selected disabled value="">Select your Gender</option>
+                <option value="male">
+                    Male
+                </option>
+                <option value="female">
+                    Female
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Race or Ethnicity</label>
+            <select class="form-control" name="ethnicity" placeholder="Enter you ethnicity" required>
+                <option class="placeholder" selected disabled value="">Select Ethnicity</option>
+                <option value="group A">
+                    Group A
+                </option>
+                <option value="group B">
+                    Group B
+                </option>
+                <option value="group C">
+                    Group C
+                </option>
+                <option value="group D">
+                    Group D
+                </option>
+                <option value="group E">
+                    Group E
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Parental Level of Education</label>
+            <select class="form-control" name="parental_level_of_education"
+                placeholder="Enter you Parent Education" required>
+                <option class="placeholder" selected disabled value="">Select Parent Education</option>
+                <option value="associate's degree">
+                    associate's degree
+                </option>
+                <option value="bachelor's degree">
+                    bachelor's degree
+                </option>
+                <option value="high school">
+                    high school
+                </option>
+                <option value="master's degree">
+                    master's degree
+                </option>
+                <option value="some college">
+                    some college
+                </option>
+                <option value="some high school">
+                    some high school
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Lunch Type</label>
+            <select class="form-control" name="lunch" placeholder="Enter you Lunch" required>
+                <option class="placeholder" selected disabled value="">Select Lunch Type</option>
+                <option value="free/reduced">
+                    free/reduced
+                </option>
+                <option value="standard">
+                    standard
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Test preparation Course</label>
+            <select class="form-control" name="test_preparation_course" placeholder="Enter you Course"
+                required>
+                <option class="placeholder" selected disabled value="">Select Test_course</option>
+                <option value="none">
+                    None
+                </option>
+                <option value="completed">
+                    Completed
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Writing Score out of 100</label>
+            <input class="form-control" type="number" name="reading_score"
+                placeholder="Enter your Reading score" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Reading Score out of 100</label>
+            <input class="form-control" type="number" name="writing_score"
+                placeholder="Enter your Reading Score" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict your Maths Score" required />
+        </div>
+    </form>
+    
+    {% if results %}
+    <div class="result">
+       Predicted Math Score (Best Model): {{ "%.2f"|format(results) }}
+    </div>
+    
+    {% if all_predictions %}
+    <div class="model-comparison">
+        <h2>All Models Prediction for This Input</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Algorithm</th>
+                    <th>Predicted Score</th>
+                    <th>Model R² Score</th>
+                    <th>Model Accuracy (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pred in all_predictions %}
+                <tr {% if loop.index == 1 %}class="best-model"{% endif %}>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        {{ pred.name }}
+                        {% if loop.index == 1 %}
+                        <span class="badge badge-success">✓ Used</span>
+                        {% endif %}
+                    </td>
+                    <td class="prediction-score">{{ "%.2f"|format(pred.prediction) }}</td>
+                    <td>{{ "%.4f"|format(pred.r2_score) }}</td>
+                    <td>{{ pred.accuracy_percentage }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+    {% endif %}
+    
+    </div>
+</body>
+</html>
