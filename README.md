@@ -68,7 +68,7 @@ setup(
     version="0.1.0",
     description="Early Academic Forecasting using ML models",
     author="Phantom074",
-    author_email="your_email@example.com",
+    author_email="mukuldhattarwal7@gmail.com",
     url="https://github.com/Phantom074/EduPredict--Early-Academic-Forecasting",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
