@@ -35,7 +35,7 @@ Student-Score-Prediction/
 
 ### Clone the repository
 ```bash
-git clone https://github.com/Phantom074/EduPredict--Early-Academic-Forecasting.git
+git clone https://github.com/mukuldhattarwal/EduPredict--Early-Academic-Forecasting.git
 cd EduPredict--Early-Academic-Forecasting
 ```
 Install dependencies
@@ -67,9 +67,9 @@ setup(
     name="edupredict",
     version="0.1.0",
     description="Early Academic Forecasting using ML models",
-    author="Phantom074",
+    author="mukuldhattarwal",
     author_email="mukuldhattarwal7@gmail.com",
-    url="https://github.com/Phantom074/EduPredict--Early-Academic-Forecasting",
+    url="https://github.com/mukuldhattarwal/EduPredict--Early-Academic-Forecasting",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=[
